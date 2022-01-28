@@ -1,12 +1,6 @@
 package account
 
-open class AccountUpdatable(balance: Double) {
-
-    private var balance: Double;
-
-    init {
-        this.balance = balance;
-    }
+open class AccountUpdatable(private var balance: Double) {
 
     fun deposit(balance: Double) {
         this.balance = this.balance + balance;

@@ -10,20 +10,15 @@ import com.google.api.client.json.JsonObjectParser
 import com.google.api.client.json.jackson2.JacksonFactory
 
 class AsyncHttpHandler<T>(
-    endpoint: String,
-    clazz: Class<T>,
-) : HttpHandler<T> {
-
-    private val endpoint: String;
-    private val clazz: Class<T>;
+    private var endpoint: String,
+    private var clazz: Class<T>
+    ) : HttpHandler<T> {
 
     private val requestFactory: HttpRequestFactory;
     private val url: GenericUrl;
     private val jsonFactory : JsonFactory;
 
     init {
-        this.endpoint = endpoint;
-        this.clazz = clazz;
         jsonFactory = JacksonFactory();
 
         requestFactory = NetHttpTransport()
