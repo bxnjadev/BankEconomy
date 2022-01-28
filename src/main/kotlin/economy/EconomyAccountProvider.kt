@@ -1,14 +1,19 @@
 package economy
 
+import Setting
 import account.Account
 import cache.LocalCache
 import http.AsyncHttpHandler
 import http.HttpHandler
 
-class EconomyAccountProvider {
+class EconomyAccountProvider(private val setting : Setting) {
 
     private val localCache: LocalCache<String, Account> = LocalCache();
-    private val httpHandler : HttpHandler<Account> = AsyncHttpHandler("economybank.net/api/", Account::class.java);
+    private val httpHandler : HttpHandler<Account>;
+
+    init {
+        httpHandler = AsyncHttpHandler(setting.getEndpoint(), Account::class.java);
+    }
 
     fun get(id: String): Account {
         val account = getIsLoaded(id);
